@@ -6,7 +6,7 @@ import {
   Marker,
   Popup,
   FeatureGroup,
-  useMapEvents
+  useMapEvents,
 } from "react-leaflet";
 import { EditControl } from "react-leaflet-draw";
 import "leaflet/dist/leaflet.css";
@@ -14,19 +14,22 @@ import "leaflet-draw/dist/leaflet.draw.css";
 import L from "leaflet";
 import markerShadow from "leaflet/dist/images/marker-shadow.png";
 import { CRS } from "leaflet";
+import { Circle } from "react-leaflet";
 
 const customMarkerIcon = new L.Icon({
   iconUrl: process.env.PUBLIC_URL + "/map-marker.png",
   shadowUrl: markerShadow,
-  iconSize: [20, 20], 
-  iconAnchor: [10, 10], 
+  iconSize: [20, 20],
+  iconAnchor: [10, 10],
   popupAnchor: [1, -34],
   shadowSize: [25, 25],
 });
 
 const DrawingMap: React.FC = () => {
-  const greeceCenter: [number, number] = [39.0742, 21.8243]; 
-  const athensPosition: [number, number] = [37.9838, 23.7275]; 
+  const greeceCenter: [number, number] = [39.0742, 21.8243];
+  const athensPosition: [number, number] = [37.9838, 23.7275];
+
+  const fillBlueOptions = { fillColor: "blue" };
 
   const handleCreate = (e: any) => {
     const type = e.layerType;
@@ -49,7 +52,7 @@ const DrawingMap: React.FC = () => {
   //       map.flyTo(e.latlng, map.getZoom())
   //     },
   //   })
-  
+
   //   return position === null ? null : (
   //     <Marker position={position} icon={customMarkerIcon}>
   //       <Popup>You are here</Popup>
@@ -79,6 +82,11 @@ const DrawingMap: React.FC = () => {
         <Popup>Athens, Greece</Popup>
       </Marker>
       {/* <LocationMarker /> */}
+      <Circle
+        center={greeceCenter}
+        pathOptions={fillBlueOptions}
+        radius={100200}
+      />
 
       <FeatureGroup>
         <EditControl
