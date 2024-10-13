@@ -1,14 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import "./App.css";
 
-import MapComponent from './components/Map';
+import Header from "./components/Header";
+import Home from "./components/Home";
+import MapComponent from "./components/Map";
 
 function App() {
   return (
-    <div className="App">
-      <MapComponent />
-    </div>
+    <Router>
+      <div className="App">
+        <Header />
+        <div className="main-content">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/map" element={<MapComponent />} />
+          </Routes>
+        </div>
+        {/* <Footer /> */}
+      </div>
+    </Router>
   );
 }
 
