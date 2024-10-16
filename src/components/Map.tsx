@@ -18,6 +18,7 @@ import { Circle, Rectangle, Pane } from "react-leaflet";
 import { SVGOverlay, LayerGroup, Tooltip, LayersControl } from "react-leaflet";
 import { LatLngTuple } from "leaflet";
 import DraggableMarker from "./DraggableMarker";
+import SetBoundsRectangles from "./BoundsFitter";
 
 export const customMarkerIcon = new L.Icon({
   iconUrl: process.env.PUBLIC_URL + "/map-marker.png",
@@ -192,6 +193,7 @@ const DrawingMap: React.FC = () => {
         </Pane>
       </Pane> */}
       <DraggableMarker />
+      <SetBoundsRectangles />
     </MapContainer>
   );
 };
