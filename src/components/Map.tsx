@@ -17,8 +17,9 @@ import { CRS } from "leaflet";
 import { Circle, Rectangle, Pane } from "react-leaflet";
 import { SVGOverlay, LayerGroup, Tooltip, LayersControl } from "react-leaflet";
 import { LatLngTuple } from "leaflet";
+import DraggableMarker from "./DraggableMarker";
 
-const customMarkerIcon = new L.Icon({
+export const customMarkerIcon = new L.Icon({
   iconUrl: process.env.PUBLIC_URL + "/map-marker.png",
   shadowUrl: markerShadow,
   iconSize: [20, 20],
@@ -43,11 +44,11 @@ const DrawingMap: React.FC = () => {
   const outer: L.LatLngBoundsLiteral = [
     [50.505, -29.09],
     [52.505, 29.09],
-  ]
+  ];
   const inner: L.LatLngBoundsLiteral = [
     [49.505, -2.09],
     [53.505, 2.09],
-  ]
+  ];
 
   const handleCreate = (e: any) => {
     const type = e.layerType;
@@ -79,22 +80,22 @@ const DrawingMap: React.FC = () => {
   // }
 
   function BlinkingPane() {
-    const [render, setRender] = useState(true)
-    const timerRef: any = useRef()
+    const [render, setRender] = useState(true);
+    const timerRef: any = useRef();
     useEffect(() => {
       timerRef.current = setInterval(() => {
-        setRender((r) => !r)
-      }, 5000)
+        setRender((r) => !r);
+      }, 5000);
       return () => {
-        clearInterval(timerRef.current)
-      }
-    }, [])
-  
+        clearInterval(timerRef.current);
+      };
+    }, []);
+
     return render ? (
       <Pane name="cyan-rectangle" style={{ zIndex: 500 }}>
-        <Rectangle bounds={outer} pathOptions={{ color: 'cyan' }} />
+        <Rectangle bounds={outer} pathOptions={{ color: "cyan" }} />
       </Pane>
-    ) : null
+    ) : null;
   }
 
   return (
@@ -184,12 +185,13 @@ const DrawingMap: React.FC = () => {
       </LayersControl>
 
       {/* <BlinkingPane /> */}
-    <Pane name="yellow-rectangle" style={{ zIndex: 499 }}>
-      <Rectangle bounds={inner} pathOptions={{ color: 'yellow' }} />
-      <Pane name="purple-rectangle">
-        <Rectangle bounds={outer} pathOptions={{ color: 'purple' }} />
-      </Pane>
-    </Pane>
+      {/* <Pane name="yellow-rectangle" style={{ zIndex: 499 }}>
+        <Rectangle bounds={inner} pathOptions={{ color: "yellow" }} />
+        <Pane name="purple-rectangle">
+          <Rectangle bounds={outer} pathOptions={{ color: "purple" }} />
+        </Pane>
+      </Pane> */}
+      <DraggableMarker />
     </MapContainer>
   );
 };
